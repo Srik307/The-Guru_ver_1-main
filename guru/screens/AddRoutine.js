@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, Button, ScrollView, Image, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Button, ScrollView, Image, StyleSheet, Alert } from 'react-native';
 import React, { useEffect, useReducer, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { createNewRoutine } from '../controllers/Operations';
@@ -193,16 +193,20 @@ const AddRoutineScreen = () => {
   const onChangeDate = (event, selectedDate, type) => {
     setShowStartDatePicker(false);
     setShowEndDatePicker(false);
-
-    if (selectedDate) {
-      const currentDate = selectedDate || new Date();
-      const formattedDate = currentDate.toISOString().split('T')[0];
-
-      if (type === 'start') {
-        handleInputChange('setStartDate', formattedDate);
-      } else {
-        handleInputChange('setEndDate', formattedDate);
+    // Add end date and start date greater validation
+    if (type === 'start') {
+      const currentDate = selectedDate || state.startDate;
+      setShowStartDatePicker(false);
+      handleInputChange('setStartDate', currentDate.toISOString().split('T')[0]);
+      handleInputChange('setEndDate', '');
+    } else {
+      const currentDate = selectedDate || state.endDate;
+      setShowEndDatePicker(false);
+      if (new Date(currentDate) < new Date(state.startDate)) {
+        Alert.alert('End date cannot be earlier than start date');
+        return;
       }
+      handleInputChange('setEndDate', currentDate.toISOString().split('T')[0]);
     }
   };
 
