@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { View, Text, TouchableOpacity,Alert, StyleSheet, FlatList, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity,Alert, StyleSheet, FlatList, ScrollView, SafeAreaView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'; // Import useNavigation
 import {createSchedule} from '../controllers/Schedule';
@@ -45,7 +45,7 @@ const RoutinesScreen = () => {
   const renderTaskItem = ({ item }) => (
     <TouchableOpacity style={styles.item} onPress={() => handleRoutinePress(item)}>
     <View style={styles.taskContainer}>
-        <Text style={styles.itemText}>{item.r_name}</Text>
+      <Text style={styles.itemText} numberOfLines={1} ellipsizeMode="tail">{item.r_name}</Text>
       <TouchableOpacity style={styles.deleteButton}>
       <Ionicons
           name="trash-outline"
@@ -76,7 +76,7 @@ const RoutinesScreen = () => {
   );
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <TouchableOpacity style={styles.addButton} onPress={handleAddRoutine}>
         <Text style={styles.addButtonText}>Add Routine</Text>
       </TouchableOpacity>
@@ -89,7 +89,7 @@ const RoutinesScreen = () => {
         keyExtractor={item => item.id}
         contentContainerStyle={styles.tasksList}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -137,6 +137,11 @@ const styles = StyleSheet.create({
   },
   deleteButton: {
     padding: 5,
+  },
+  itemText: {
+    fontSize: 15,
+    color: '#000',
+    width: '80%',
   },
 });
 

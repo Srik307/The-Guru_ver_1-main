@@ -122,7 +122,7 @@ const AddRoutineScreen = () => {
           setSchedule(newschedule);
           isLoading(false);
           alert("Routine Added");
-          navigation.navigate('Routines');
+          navigation.navigate('RoutinesScreen');
       } catch (error) {
           console.error(error);
           alert('Failed to add routine');
@@ -280,6 +280,7 @@ const AddRoutineScreen = () => {
             <Picker.Item label="9 PM - 10 PM" value="9 PM - 10 PM" />
             <Picker.Item label="10 PM - 11 PM" value="10 PM - 11 PM" />
             <Picker.Item label="11 PM - 12 AM" value="11 PM - 12 AM" /> */}
+            <Picker.Item label="Select" value="" />
             <Picker.Item label="Morning" value="Morning" />
             <Picker.Item label="Afternoon" value="Afternoon" />
             <Picker.Item label="Evening" value="Evening" />
