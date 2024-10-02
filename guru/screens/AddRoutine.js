@@ -226,11 +226,13 @@ const AddRoutineScreen = () => {
         <Text style={styles.label}>Routine Name <Text style={{color:"red"}}>*</Text></Text>
         <TextInput
           style={styles.input}
+          maxLength={50}
           placeholder='Enter Routine Name'
           onChangeText={(value) => handleInputChange('setSelectedValue', value)}
         />
         <Text style={styles.label}>Description</Text>
         <TextInput
+          maxLength={700}
           style={styles.input}
           placeholder='Enter description'
           multiline

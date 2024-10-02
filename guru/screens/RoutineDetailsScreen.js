@@ -79,6 +79,33 @@ export default function RoutineDetailsScreen({ route, navigation }) {
     }
   };
 
+  const parseDays = (days) => {
+    if (!days) return "";
+    return days
+      .map((day) => {
+        switch (day) {
+          case 0:
+            return "Sun";
+          case 1:
+            return "Mon";
+          case 2:
+            return "Tue";
+          case 3:
+            return "Wed";
+          case 4:
+            return "Thu";
+          case 5:
+            return "Fri";
+          case 6:
+            return "Sat";
+          default:
+            return "";
+        }
+      })
+      .join(", ");
+  }
+
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <ImageBackground source={bg} >
@@ -105,6 +132,10 @@ export default function RoutineDetailsScreen({ route, navigation }) {
               <View style={styles.section}>
                 <Text style={styles.label}>End Date:</Text>
                 <Text style={styles.text}>{routine.endDate || "N/A"}</Text>
+              </View>
+              <View style={styles.section}>
+                <Text style={styles.label}>Days:</Text>
+                <Text style={{...styles.text,fontSize:15}}>{parseDays(routine.days)|| "N/A"}</Text>
               </View>
             </>
           )}
