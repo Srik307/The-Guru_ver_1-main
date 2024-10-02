@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "guru",
+    "slug": "guru1",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.myapp.guru"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "4ff1e36e-8bde-47d5-b0fa-7da88f677ed5"
+      }
+    },
+    "owner": "giridhar55"
+  }
+}
