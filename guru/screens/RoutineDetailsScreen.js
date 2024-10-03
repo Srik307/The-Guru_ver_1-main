@@ -10,8 +10,7 @@ import {
   ImageBackground,
   Alert,
 } from "react-native";
-import { Video } from "expo-av";
-import { Audio as ExpoAudio } from "expo-av"; // Ensure this import is correct
+import { Audio } from 'expo-av';
 
 import { Retrieveit } from "../controllers/LocalStorage";
 import AudioComp from "../components/Audio";
@@ -26,6 +25,8 @@ import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 import { Ionicons } from "@expo/vector-icons";
 
 import bg from "../assets/bg.png";
+
+import alertaudio from "../assets/alert.mp3";
 
 export default function RoutineDetailsScreen({ route, navigation }) {
   const { routinemeta, type, selectedDate } = route.params;
@@ -127,6 +128,17 @@ const UncompleteRoutine = () => {
   }
 
 
+  const AlertSound=async()=>{
+    const soundObject = new Audio.Sound();
+    try {
+      await soundObject.loadAsync(alertaudio);
+      await soundObject.playAsync();
+    } catch (error) {
+      console.log("Error playing sound",error);
+    }
+  }
+
+
   const Restart=()=>{
     setIsRestart(false);
     setTimeout(() => {
@@ -135,6 +147,7 @@ const UncompleteRoutine = () => {
   }
 
   const handleComplete=()=>{
+    AlertSound();
     Alert.alert("Routine Update", "Do you want to mark as complete", [
       {
         text: "Complete",
