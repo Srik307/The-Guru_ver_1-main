@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { View, Button ,TouchableOpacity,Text} from 'react-native';
 import { Video } from 'expo-av';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 const VideoComp = ({ source,isPlayingTimer}) => {
   const [videoRef, setVideoRef] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [playCount, setPlayCount] = useState(0);
+  const [repeat, setRepeat] = useState(false);
 
   const playVideo = async () => {
     if (videoRef) {
@@ -29,6 +30,10 @@ const VideoComp = ({ source,isPlayingTimer}) => {
   ,[isPlayingTimer]);
 
 
+  const handleRepeatPress = () => {
+    setRepeat(!repeat);
+  }
+
   return (
     <View>
       <Video
@@ -37,12 +42,14 @@ const VideoComp = ({ source,isPlayingTimer}) => {
         style={{ width: 300, height: 200 }}
         useNativeControls
         resizeMode="contain"
-        isLooping={true}
+        isLooping={repeat}
       />
-      <TouchableOpacity style={{ padding: 10 ,backgroundColor:"orange",borderRadius:10,width:"100%",alignItems:"center"}}
-        onPress={isPlaying ? stopVideo : playVideo} >
-        <Text>{isPlaying ? 'Stop' : 'Play'} video</Text>
+    <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',marginTop:20}}>
+      <Text>Repeat Mode</Text>
+      <TouchableOpacity onPress={handleRepeatPress}>
+        <MaterialIcons style={{ color: repeat ? 'orange' : 'black', fontWeight: 'bold' }} name="repeat" size={30} />
       </TouchableOpacity>
+    </View>
     </View>
   );
 };

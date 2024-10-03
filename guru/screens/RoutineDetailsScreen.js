@@ -329,8 +329,8 @@ const styles = StyleSheet.create({
   sectionlarge: {
     display:"flex",
     flexDirection:"column",
+    backgroundColor: "rgba(255,255,255,0.8)", // low opacity white background for sections
     justifyContent:"space-between",
-    backgroundColor: "transparent",
     borderRadius: 10,
     padding: 15,
     marginBottom: 20,
