@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { View, TextInput, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { View, TextInput, StyleSheet, TouchableOpacity, Text ,Alert} from 'react-native';
 import { FontAwesome } from '@expo/vector-icons'; // You can use any icon library like react-native-vector-icons
 import { useDataStore } from '../datastore/data';
 import { Retrieveit } from '../controllers/LocalStorage';
@@ -36,7 +36,7 @@ const Journal = () => {
     setUser({ ...user, usermeta: newUserMeta });
 
     await updateUser({ ...user, usermeta: newUserMeta }, token);
-    navigation.goBack(); 
+    Alert.alert("Journal Entry Saved!");
   }
 
   return (
@@ -52,10 +52,6 @@ const Journal = () => {
       {/* Icon and Submit Button Section */}
       <View style={styles.footerContainer}>
         {/* Icon Section */}
-        <View style={styles.iconContainer}>
-          <FontAwesome name="microphone" size={24} color="black" />
-          <FontAwesome name="image" size={24} color="black" style={styles.icon} />
-        </View>
         
         {/* Submit Button */}
         <TouchableOpacity style={styles.submitButton} onPress={handleJournal}>

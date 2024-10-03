@@ -1,4 +1,0 @@
-[10/2/2024 4:27 PM] Ariya Bala: You can play in loop until the timer is over or have a check box “repeat” near the audio while adding the routine and also in routine page
-[10/2/2024 4:42 PM] Ariya Bala: The mike and image icon in journal didn’t work
-[10/2/2024 5:41 PM] Ariya Bala: Journal entry when submitted takes me to the homepage, there is no option for me to over view the journal
-[10/2/2024 5:41 PM] Ariya Bala: I’m not sure if it even submits
