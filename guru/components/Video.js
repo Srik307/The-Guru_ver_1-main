@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Button ,TouchableOpacity,Text} from 'react-native';
 import { Video } from 'expo-av';
 
-const VideoComp = ({ source, rep }) => {
+const VideoComp = ({ source,isPlayingTimer}) => {
   const [videoRef, setVideoRef] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [playCount, setPlayCount] = useState(0);
@@ -22,17 +22,12 @@ const VideoComp = ({ source, rep }) => {
   };
 
   useEffect(() => {
-    if (videoRef) {
-      videoRef.setOnPlaybackStatusUpdate((status) => {
-        if (status.didJustFinish && playCount < rep - 1) {
-          setPlayCount(playCount + 1);
-          videoRef.replayAsync();
-        } else if (status.didJustFinish) {
-          setIsPlaying(false);
-        }
-      });
+    if (isPlaying){
+      stopVideo();
     }
-  }, [videoRef, playCount, rep]);
+  } 
+  ,[isPlayingTimer]);
+
 
   return (
     <View>
@@ -42,11 +37,11 @@ const VideoComp = ({ source, rep }) => {
         style={{ width: 300, height: 200 }}
         useNativeControls
         resizeMode="contain"
-        isLooping={false}
+        isLooping={true}
       />
       <TouchableOpacity style={{ padding: 10 ,backgroundColor:"orange",borderRadius:10,width:"100%",alignItems:"center"}}
         onPress={isPlaying ? stopVideo : playVideo} >
-        <Text>{isPlaying ? 'Stop' : 'Play'} Sound</Text>
+        <Text>{isPlaying ? 'Stop' : 'Play'} video</Text>
       </TouchableOpacity>
     </View>
   );

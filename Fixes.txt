@@ -1,9 +1,7 @@
-[10/2/2024 4:15 PM] Ariya Bala: Text goes being the box. Try to reduce the font and restrict with number of characters so it’s displayed within the box
-[10/2/2024 4:16 PM] Ariya Bala: Also remove the word description because that is pushing the whole para to the right alignment
 [10/2/2024 4:22 PM] Ariya Bala: I can’t pause the timer
 [10/2/2024 4:24 PM] Ariya Bala: Play some sound when the timer is over
 [10/2/2024 4:26 PM] Ariya Bala: Audio is not playing till the timer is off.
 [10/2/2024 4:27 PM] Ariya Bala: You can play in loop until the timer is over or have a check box “repeat” near the audio while adding the routine and also in routine page
 [10/2/2024 4:42 PM] Ariya Bala: The mike and image icon in journal didn’t work
 [10/2/2024 5:41 PM] Ariya Bala: Journal entry when submitted takes me to the homepage, there is no option for me to over view the journal
-[10/2/2024 5:41 PM] Ariya Bala: I’m not sure if it even submits 
+[10/2/2024 5:41 PM] Ariya Bala: I’m not sure if it even submits
