@@ -1,10 +1,10 @@
 const firebaseConfig = {
-  apiKey: "AIzaSyAQ2PZDcP4cEaHHfyQqEGD0AhmwoPy1ut4",
-  authDomain: "hello-8e8e4.firebaseapp.com",
-  projectId: "hello-8e8e4",
-  storageBucket: "hello-8e8e4.appspot.com",
-  messagingSenderId: "728368305247",
-  appId: "1:728368305247:web:5c6d5b70c59870fd7037ea"
+  apiKey: "AIzaSyAiG3gLfPuByEmai2Ih1hYl2TqUnr5q5hg",
+  authDomain: "printx-newmanager.firebaseapp.com",
+  projectId: "printx-newmanager",
+  storageBucket: "printx-newmanager.appspot.com",
+  messagingSenderId: "746766178407",
+  appId: "1:746766178407:web:3257d2f6d4ab23115b9cc2"
 };
 
 //

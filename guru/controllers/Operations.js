@@ -14,16 +14,17 @@ export const getuser = (token) => {
                 'Content-Type':'application/json',
                 'authorization':`Bearer ${token}`
             }
-        }).then(res=>res.json())
-        .then(data=>{
-            if(data.error){
-                console.log(data.error);
+        }).then(async res=>{
+            const response=await res.json();
+            if(res.status!=200){
+                reject(response.message);
             }
             else{
-                resolve(data.user);
+                resolve(response.user);
             }
-        }).catch(err=>{
-            console.log(err);
+        }
+        ).catch(err=>{
+            reject("Error in getting user");
         });
     });
 }
@@ -38,7 +39,7 @@ export const postLogin =(user,token,params) =>{
            }
            else{
             await AsyncStorage.clear();
-       console.log('token',token);
+       console.log('token',token,user);
        await Storeit('token',token);
        const fetchedRoutines= await checkAndFetchStoreRoutineAll(user.routines);
        console.log(fetchedRoutines,"fetched routines");

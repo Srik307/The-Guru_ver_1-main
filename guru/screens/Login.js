@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity,Image} from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity,Image, Alert} from 'react-native';
 import { useAuthStore,useDataStore} from '../datastore/data';
 import { Storeit } from '../controllers/LocalStorage';
 import { getuser, postLogin } from '../controllers/Operations';
@@ -25,24 +25,34 @@ export default function LoginPage({ navigation }) {
         email:email,
         password:password
       })
-    }).then(res=>res.json())
-    .then(async data=>{
-      if(data.error){
-        console.log(data.error);
-      }
-      else{
-        console.log(data.token);
-        
-        setToken(data.token);
-        let curuser=await getuser(data.token);
-        setUser(curuser);
-        console.log(curuser);
-        console.log("going to postlogin");
-        await postLogin(curuser,data.token);
-        console.log("going to home");
-        setIsAuthenticated(true);
-      }
-    }).catch(err=>{
+    }).then(async res=>
+
+      {
+        let data= await res.json();
+        data=data.data;
+        if(res.status!=200){
+        Alert.alert("Error",data.message);
+        return;
+        }else{
+            console.log(data.token);
+            setToken(data.token);
+            let curuser;
+            try{
+            curuser=await getuser(data.token);
+            }
+            catch(err){
+              Alert.alert("Error",err);
+              return;
+            }
+            setUser(curuser);
+            console.log(curuser);
+            console.log("going to postlogin");
+            await postLogin(curuser,data.token);
+            console.log("going to home");
+            setIsAuthenticated(true);
+        }
+      })
+      .catch(err=>{
       console.log(err);
     });
 

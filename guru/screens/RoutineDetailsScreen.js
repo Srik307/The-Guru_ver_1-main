@@ -35,6 +35,8 @@ export default function RoutineDetailsScreen({ route, navigation }) {
   const { user, setUser } = useDataStore();
   const [isPlaying, setIsPlaying] = useState(false); // New state for timer control
   const [isrestart, setIsRestart] = useState(true); // New state for timer control
+  const [alertuser,setAlertUser]=useState(false);
+  const [interg,setInterg]=useState(null);
 
   useEffect(() => {
     const fetchRoutine = async () => {
@@ -82,6 +84,9 @@ const UncompleteRoutine = () => {
         routinemeta.completed = false;
         setSchedule(updatedSchedules);
         alert("Routine marked as incomplete!");
+        setIsPlaying(false); // New state for timer control
+        setIsRestart(true); // New state for timer control
+        setAlertUser(false);
       }
     }
     else{
@@ -132,11 +137,23 @@ const UncompleteRoutine = () => {
     const soundObject = new Audio.Sound();
     try {
       await soundObject.loadAsync(alertaudio);
+      await soundObject.setIsLoopingAsync(true);
       await soundObject.playAsync();
+      setInterg(soundObject);
     } catch (error) {
       console.log("Error playing sound",error);
     }
   }
+
+  useEffect(()=>{
+    const l=async ()=>{
+      console.log("jewkjd");
+      await interg.stopAsync();
+      await interg.unloadAsync();
+    }
+    l();
+  },[alertuser]);
+
 
 
   const Restart=()=>{
@@ -152,12 +169,13 @@ const UncompleteRoutine = () => {
       {
         text: "Complete",
         onPress: () => {
+          setAlertUser(true);
           completeRoutine();
         },
       },
       {
         text: "Cancel",
-        onPress: () => {Restart()},
+        onPress: () => {setAlertUser(true);Restart()},
         style: "cancel",
       },
     ]);
@@ -232,7 +250,7 @@ const UncompleteRoutine = () => {
               {isrestart && (
               <CountdownCircleTimer
                 isPlaying={isPlaying}
-                duration={parseInt(routine.duration)*60}
+                duration={10||parseInt(routine.duration)*60}
                 colors={['#004777', '#F7B801', '#A30000', '#A30000']}
                 colorsTime={[7, 5, 2, 0]}
                 size={200}
@@ -257,7 +275,7 @@ const UncompleteRoutine = () => {
                   <Ionicons name="pause" size={30} color="black" onPress={() => setIsPlaying(false)} />
                 )}
                 {!isPlaying && (
-                  <Ionicons name="play" size={30} color="black" onPress={() => setIsPlaying(true)} />
+                  <Ionicons name="play" size={30} color="black" onPress={() => {setIsPlaying(true);setAlertUser(false)}} />
                 )}
                 </View>
               {/* Start Timer Button */}
@@ -273,7 +291,7 @@ const UncompleteRoutine = () => {
         style={{...styles.buttonContainer,backgroundColor:"green"}}
           onPress={UncompleteRoutine}
         >
-          <Text style={{color:"white"}}>Completed</Text>
+          <Text style={{color:"white"}}>Mark as Uncomplete</Text>
         </TouchableOpacity>
       :
       <TouchableOpacity
