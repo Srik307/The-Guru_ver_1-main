@@ -6,7 +6,7 @@ export const useAuthStore = create((set) => ({
   setIsAuthenticated: (authState) => set({ isAuthenticated: authState }),
 }));
 
-export const ip="http://192.168.203.220:3000";
+export const ip="https://eternal-unduly-lizard.ngrok-free.app";
 //"https://eternal-unduly-lizard.ngrok-free.app";
 //'https://the-guru-ver-1.onrender.com';
 //'http://192.168.190.220:3000'

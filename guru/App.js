@@ -106,7 +106,7 @@ export default function App() {
       setUser(curuser);
       console.log(curuser);
       console.log("going to postlogin");
-      await postLogin(curuser,token);
+      await postLogin(curuser,token,1);
       console.log("going to home");
       setIsAuthenticated(true);
       setLoading(false);

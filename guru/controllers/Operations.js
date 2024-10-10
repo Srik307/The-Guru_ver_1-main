@@ -29,16 +29,23 @@ export const getuser = (token) => {
 }
 
 
-export const postLogin =(user,token) =>{
+export const postLogin =(user,token,params) =>{
     return new Promise(async(resolve,reject)=>{
-       await AsyncStorage.clear();
+        if(params){
+            const schedule=await Retrieveit('@schedule');
+            console.log("1",schedule);
+            await storeSchedule(schedule);
+           }
+           else{
+            await AsyncStorage.clear();
        console.log('token',token);
        await Storeit('token',token);
        const fetchedRoutines= await checkAndFetchStoreRoutineAll(user.routines);
        console.log(fetchedRoutines,"fetched routines");
-       const schedule=await createSchedule(fetchedRoutines);
+        const schedule=await createSchedule(fetchedRoutines);
         console.log(schedule,typeof(schedule));
         await storeSchedule(schedule);
+       }
         resolve();
     });
 }
