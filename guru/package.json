@@ -43,7 +43,8 @@
     "react-native-snap-carousel": "^4.0.0-beta.6",
     "react-native-svg": "^15.7.1",
     "use-sync-external-store": "^1.2.2",
-    "zustand": "^4.5.4"
+    "zustand": "^4.5.4",
+    "expo-linear-gradient": "~13.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

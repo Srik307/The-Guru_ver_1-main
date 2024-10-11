@@ -4,6 +4,7 @@ import { useSchedule, useAuthStore, useDataStore, ip } from '../datastore/data';
 import { Retrieveit } from '../controllers/LocalStorage';
 import { updateUser } from '../controllers/UserControllers';
 import bg from "../assets/bg.png";
+import { LinearGradient } from 'expo-linear-gradient';
 
 const HomeScreen = ({navigation}) => {
   const { schedules, setSchedule } = useSchedule();
@@ -71,18 +72,18 @@ const HomeScreen = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Image
-            source={require('../assets/i2.jpeg')}
-            style={styles.image}
-          />
-          
+        <View style={{ flex: 1, alignItems: 'center',padding:5 }}>
+        <LinearGradient 
+        colors={['#4BC0C8','#FEAC5E']}
+        start={{ x: 0.1, y: 0.2 }}
+        style={styles.image}>
           {/* Wishing text, username, and quote */}
           <View style={styles.overlayTextContainer}>
             <Text style={styles.wishingText}>{greeting},</Text>
             <Text style={styles.usernameText}>{user.name}</Text>
             <Text style={styles.quoteText}>“Believe you can and you're halfway there.”</Text>
           </View>
+          </LinearGradient>
         </View>
 
         {/* Mood Container */}
@@ -123,10 +124,12 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 300,
     borderRadius: 10,
+    justifyContent: 'center',
+    alignItems:"center",
   },
   overlayTextContainer: {
     position: 'absolute',
-    top: '50%',
+    top: '40%',
     alignItems: 'center',
   },
   wishingText: {
@@ -149,7 +152,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffda8b',
     padding: 20,
     borderRadius: 10,
-    margin: 10,
+    margin: 5,
     alignItems: 'center',
     overflow: 'hidden',
   },

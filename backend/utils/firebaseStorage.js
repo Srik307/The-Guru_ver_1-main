@@ -14,7 +14,7 @@ const getFileName = (file)=> {
 };
 
 const uploadFile = async (file,folderName) =>{
-    const fileName = folderName!="profile"?getFileName(file):file.originalname;
+    const fileName = (folderName!="profile" && folderName!="journel")?getFileName(file):file.originalname;
     console.log(fileName);
     const storageRef = ref(store,folderName+'/'+fileName);
     const snapshot = await uploadBytes(storageRef, file.buffer);

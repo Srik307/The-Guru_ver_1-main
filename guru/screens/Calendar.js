@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import Ionicons from 'react-native-vector-icons/Ionicons'; // Consistently using Ionicons
-import { Retrieveit } from '../controllers/LocalStorage';
-import { useSchedule } from '../datastore/data';
+import JournelView from '../components/Journel/JournelView';
+import { useSchedule, useAuthStore, useDataStore, ip } from '../datastore/data';
 
 const TaskManager = ({ navigation }) => {
   const { schedules } = useSchedule();
   const [routinesForDate, setRoutineForDate] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
-
+  const { user, setUser } = useDataStore();
+  const [show,setShow]=useState(null);
   const handleDateSelect = (day) => {
     console.log('Selected Date:', day.dateString);
     setSelectedDate(day.dateString);
@@ -49,6 +50,9 @@ const TaskManager = ({ navigation }) => {
             [selectedDate]: { selected: true, marked: true, selectedColor: 'orange' },
           }}
         />
+        <View>
+          <JournelView index={0} date={selectedDate} journel={user.usermeta.dates[selectedDate]} show={show} setShow={setShow} />
+        </View>
         <View style={{ width: '100%', alignItems: 'center', marginBottom: 30 }}>
           <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
             Overall Completed: {perOfComp(routinesForDate, 0)}/{routinesForDate.length}

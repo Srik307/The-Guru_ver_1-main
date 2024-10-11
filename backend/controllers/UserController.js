@@ -80,7 +80,54 @@ const UpdateUserDetails=async (req,res)=>{
     }
 }
 
+const UpdateJournel=async (req,res)=>{
+    try {
+        let token = req.headers.authorization;
+        token=token.split(' ')[1];
+        let user_id=await verifyToken(token);
+
+        const usermeta=JSON.parse(req.body.usermeta);
+
+        const date=req.body.date;
+        let url;
+        console.log("qshdb",date);
+        if(req.file){
+        url=await uploadFile(req.file,'journel');
+        if(usermeta.dates[date].length==3){
+        const oldurl=[...usermeta.dates[date]];
+        oldurl[2]=url;
+        console.log(oldurl);
+        
+        usermeta.dates[date]=oldurl;
+        console.log(usermeta.dates[date]);
+        }
+        }
+        else{
+            if(usermeta.dates[date].length==3){
+                const oldurl=[...usermeta.dates[date]];
+                oldurl[2]="";
+                console.log(oldurl);
+                
+                usermeta.dates[date]=oldurl;
+                console.log(usermeta.dates[date]);
+        }
+        console.log(usermeta.dates[date],req.file);
+        }
+        
+        await
+        User.updateOne({_id:user_id.id}, {usermeta:usermeta});
+        res
+            .status(200)
+            .json({msg: 'Journel Updated',usermeta:usermeta});
+    }
+    catch (err) {
+        console.error(err);
+        res
+            .status(500)
+            .send('Server Error');
+    }
+}
 
 
 
-module.exports={getuser,UpdateUserDetails,getQuestions};
+module.exports={getuser,UpdateUserDetails,getQuestions,UpdateJournel};

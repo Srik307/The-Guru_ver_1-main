@@ -35,6 +35,7 @@ function HomeTabs() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
+        tabBarActiveTintColor: 'orange',
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 

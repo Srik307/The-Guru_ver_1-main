@@ -33,7 +33,6 @@ export const deleteRoutineOnFrontend= async (routine,user) => {
 export const updateUser=async (user,token)=>{
     return new Promise(async(resolve,reject)=>{
         try {
-            
             console.log("n",JSON.stringify(user),token);
             const response = await fetch(`${ip}/api/user/update`,{
                 method:'POST',
@@ -52,6 +51,51 @@ export const updateUser=async (user,token)=>{
         }
     });
 }
+
+
+export const updateJournel=async (user_id,token,usermeta,type,image,today)=>{
+    return new Promise(async(resolve,reject)=>{
+        try {
+            const Data = new FormData();
+            if(type=="image"){
+                console.log(user_id,image); 
+                if (image) {
+                    try {
+                      const filePath = image;
+                      const file = {
+                        uri: filePath,
+                        name: `${user_id}_${today}journel.jpg`,
+                        type: "image/jpeg",
+                      };
+                      Data.append("JImage", file);
+                      console.log("Image added to form data");
+                    } catch (error) {
+                      console.error("Error reading image file:", error);
+                      return;
+                    }
+                  }
+            }
+            Data.append("date",today);
+            Data.append('usermeta',JSON.stringify(usermeta));
+            const response = await fetch(`${ip}/api/user/updatejournel`,{
+                method:'POST',
+                headers:{
+                    "content-type": "multipart/form-data",
+                    "authorization":`Bearer ${token}`
+                },
+                body:Data
+            });
+            const data = await response.json();
+            console.log(data);
+            resolve(data.usermeta);
+        } catch (error) {
+            console.error('Error updating journel:', error);
+            reject('Error updating journel');
+        }
+    }
+)
+}
+
 
 
 export const getQuestions=async (token)=>{

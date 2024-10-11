@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
-import { View, TouchableOpacity, StyleSheet, Image } from "react-native";
+import { View, TouchableOpacity, StyleSheet, Image, StatusBar } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { ip, useDataStore } from "../datastore/data";
 
@@ -10,7 +10,7 @@ const HeaderComp = () => {
   console.log(`${user.photo}=${new Date().getTime()}`);
 
   return (
-    <View style={styles.container}>
+    <View style={{marginTop: 30}}>
       <TouchableOpacity
         onPress={() => navigation.navigate("Profile")}
         style={styles.profileIcon}
