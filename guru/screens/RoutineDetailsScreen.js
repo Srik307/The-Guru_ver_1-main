@@ -250,7 +250,7 @@ const UncompleteRoutine = () => {
               {isrestart && (
               <CountdownCircleTimer
                 isPlaying={isPlaying}
-                duration={10||parseInt(routine.duration)*60}
+                duration={parseInt(routine.duration)*60}
                 colors={['#004777', '#F7B801', '#A30000', '#A30000']}
                 colorsTime={[7, 5, 2, 0]}
                 size={200}
